@@ -1,0 +1,88 @@
+html {
+  font: 16px/1.5 Roboto, helvetica, arial, sans-serif;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#panels {
+  height: calc(100% - 48px);
+  width: 100%;
+}
+
+#panels > section {
+  height: 100%;
+  width: 100%;
+}
+
+#tabs {
+  background-color: #fff;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#tabs li {
+  display: inline;
+  flex-grow: 1;
+}
+
+#tabs li a {
+  background-color: inherit;
+  border-bottom: 1px solid rgb(230, 233, 239);
+  color: inherit;
+  display: block;
+  font-size: 16px;
+  line-height: 46px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#tabs li a:hover {
+  background-color: rgb(230, 233, 239);
+}
+
+#tabs li a:visited {
+  color: inherit;
+}
+
+#tabs li a.selected {
+  color: rgb(0, 133, 255);
+  border-bottom: 2px solid rgb(0, 133, 255);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+#modal {
+  align-items: center;
+  animation: 1s cubic-bezier(0.36, 0, 0.64, 1) both fade-in;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 0px;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+}
+
+#modal strong {
+  font-size: 20px;
+}
+
+#modal[hidden] {
+  display: none;
+}

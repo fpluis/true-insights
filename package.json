@@ -1,0 +1,105 @@
+{
+  "name": "monday-insights",
+  "version": "0.1.0",
+  "description": "An entry into the monday.com hackathon",
+  "homepage": "https://github.com/fpluis/monday-insights#readme",
+  "bugs": {
+    "url": "https://github.com/fpluis/monday-insights/issues"
+  },
+  "license": "UNLICENSED",
+  "author": "Luis Fominaya <fpluis@outlook.com>",
+  "contributors": [
+    "Artem Rudenko <rtomrud@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fpluis/monday-insights.git"
+  },
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "lint": "eslint .",
+    "start": "http-server widget -c-1",
+    "pretest": "npm run build",
+    "test": "tape test/{*,**}.js",
+    "posttest": "npm run lint"
+  },
+  "dependencies": {
+    "jsonwebtoken": "8.5.1",
+    "login-with-twitter": "1.2.4",
+    "nlp": "file:..\\nlp",
+    "node-fetch": "2.6.1",
+    "twitter-lite": "1.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "18.0.0",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "11.2.1",
+    "@rollup/plugin-replace": "2.4.2",
+    "aws-sdk": "2.895.0",
+    "builtin-modules": "3.2.0",
+    "eslint": "7.25.0",
+    "eslint-config-pretty-strict": "8.0.1",
+    "eslint-plugin-prettier": "3.4.0",
+    "glob": "7.1.6",
+    "http-server": "0.12.3",
+    "nyc": "15.1.0",
+    "prettier": "2.2.1",
+    "rimraf": "3.0.2",
+    "rollup": "2.46.0",
+    "rollup-plugin-copy": "3.4.0",
+    "rollup-plugin-terser": "7.0.2",
+    "tape": "5.2.2"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "private": true,
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "extends": [
+      "./node_modules/eslint-config-pretty-strict/index.js"
+    ],
+    "overrides": [
+      {
+        "env": {
+          "browser": true
+        },
+        "files": [
+          "widget/**/*"
+        ],
+        "parserOptions": {
+          "ecmaVersion": 2020,
+          "sourceType": "script"
+        }
+      },
+      {
+        "files": [
+          "widget/index.js"
+        ],
+        "globals": {
+          "Plotly": true,
+          "WordCloud": true,
+          "cytoscape": true
+        }
+      }
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "root": true
+  },
+  "eslintIgnore": [
+    "coverage",
+    "dist",
+    "widget/wordcloud2.js"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  }
+}

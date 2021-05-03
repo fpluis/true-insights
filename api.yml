@@ -1,0 +1,105 @@
+openapi: 3.0.1
+info:
+  title: monday_app
+  version: "1.0"
+servers:
+  - url: https://${api_domain}/{basePath}
+    variables:
+      basePath:
+        default: /monday
+paths:
+  /authorize-populate:
+    get:
+      responses:
+        "200":
+          description: OK
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/authorize_proxy"
+  /oauth/callback-populate:
+    get:
+      responses:
+        "200":
+          description: OK
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/authorize_proxy"
+  /oauth/callback-twitter:
+    get:
+      responses:
+        "200":
+          description: OK
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/authorize_proxy"
+  /subscribe:
+    post:
+      responses:
+        "200":
+          description: OK
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/authorize_proxy"
+  /unsubscribe:
+    post:
+      responses:
+        "200":
+          description: OK
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/authorize_proxy"
+  /tweet-definition:
+    post:
+      responses:
+        "200":
+          description: OK
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/authorize_proxy"
+  /nlp:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                title: Text
+                description: A text
+                type: object
+                properties:
+                  text:
+                    type: string
+                required:
+                  - text
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  title: Document
+                  description: A document
+                  type: object
+                  properties:
+                    sentences:
+                      type: array
+                      items:
+                        type: array
+                        items:
+                          title: Token
+                          description: A token
+                          type: object
+                  required:
+                    - sentences
+      x-amazon-apigateway-integration:
+        $ref: "#/components/x-amazon-apigateway-integrations/nlp_proxy"
+components:
+  x-amazon-apigateway-integrations:
+    authorize_proxy:
+      type: aws_proxy
+      httpMethod: POST
+      payloadFormatVersion: "2.0"
+      uri: arn:$${AWS::Partition}:apigateway:$${AWS::Region}:lambda:path/2015-03-31/functions/${authorize_lambda_function_arn}/invocations
+    nlp_proxy:
+      type: aws_proxy
+      httpMethod: POST
+      payloadFormatVersion: "2.0"
+      uri: arn:$${AWS::Partition}:apigateway:$${AWS::Region}:lambda:path/2015-03-31/functions/${nlp_lambda_function_arn}/invocations

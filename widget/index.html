@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Insights Widget</title>
+    <meta name="theme-color" content="#fff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/monday-sdk-js/dist/main.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    <script src="./wordcloud2.js"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <ul id="tabs">
+      <li><a href="#metrics" class="selected">Metrics</a></li>
+      <li><a href="#wordcloud">Word Cloud</a></li>
+      <li><a href="#barplot">Keywords</a></li>
+      <li><a href="#cluster">Relations</a></li>
+    </ul>
+    <section id="panels">
+      <section id="metrics"></section>
+      <section id="wordcloud" hidden></section>
+      <section id="barplot" hidden></section>
+      <section id="cluster" hidden></section>
+    </section>
+    <section id="modal" hidden></section>
+    <script src="./index.js"></script>
+  </body>
+</html>
